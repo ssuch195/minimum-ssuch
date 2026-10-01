@@ -38,25 +38,15 @@ void kprintf(const char *fmt, ...) {
             continue; 
         }
         switch (*++fmt) {
-        case 's': { 
-            const char *s = va_arg(ap, const char *);
-            uart_puts(s ? s : "(null)"); 
-            break; 
-        }
-        case 'c': {
-            uart_putc((char)va_arg(ap, int)); 
+        case 's': const char *s = va_arg(ap, const char *); uart_puts(s ? s : "(null)"); 
             break;
-        }
-        case 'u': {
-            put_uint(va_arg(ap, uint32_t), 10); 
+        case 'c': uart_putc((char)va_arg(ap, int)); 
             break;
-        }
-        case 'x': {
-            put_uint(va_arg(ap, uint32_t), 16); 
+        case 'u': put_uint(va_arg(ap, uint32_t), 10); 
             break;
-        }
-        case 'd': { 
-            int32_t d = va_arg(ap, int32_t);
+        case 'x': put_uint(va_arg(ap, uint32_t), 16); 
+            break;
+        case 'd': int32_t d = va_arg(ap, int32_t);
             if (d < 0) { 
                 uart_putc('-'); 
                 put_uint((uint32_t)(-(int64_t)d), 10); 
@@ -65,16 +55,10 @@ void kprintf(const char *fmt, ...) {
                 put_uint((uint32_t)d, 10);
                 break; 
             }
-        }
-        case '%': {
-            uart_putc('%'); 
+        case '%': uart_putc('%'); 
             break;
-        }
-        default:  {
-            uart_putc('%'); 
-            uart_putc(*fmt); 
+        default: uart_putc('%'); uart_putc(*fmt); 
             break;
-        }
         }
     }
     va_end(ap);
