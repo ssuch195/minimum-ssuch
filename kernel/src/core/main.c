@@ -1,7 +1,7 @@
 #include "minemu/boot.h"
 #include "minemu/trap.h"
 #include "minemu/trace.h"
-#include "uart.h"
+#include "../drivers/uart.h"
 #include <minemu/irq.h>
 #include <minemu/ksys.h>
 

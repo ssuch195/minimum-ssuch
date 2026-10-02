@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "uart.h"
+#include "../drivers/uart.h"
 #include <minemu/ksys.h>
 
 #define LINE_MAX_LEN 20
