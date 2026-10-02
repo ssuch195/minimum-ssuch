@@ -19,7 +19,7 @@ OBJECTS := $(CORE_OBJECT) $(RUNTIME_OBJECTS)
 DEPENDENCIES := $(OBJECTS:.o=.d)
 
 ARCH_FLAGS := -mcpu=cortex-a9 -marm -mfloat-abi=soft
-CPPFLAGS := -Iinclude
+CPPFLAGS := -Iinclude -Isrc/drivers
 CFLAGS := $(ARCH_FLAGS) \
 	-ffreestanding \
 	-fno-builtin \
@@ -65,6 +65,10 @@ $(BUILD)/core/%.o: src/core/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
+$(BUILD)/drivers/%.o: src/drivers/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	
 $(BUILD)/runtime/%.o: src/runtime/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
